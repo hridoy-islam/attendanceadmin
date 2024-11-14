@@ -16,7 +16,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import * as z from 'zod';
 
 const formSchema = z.object({
@@ -106,23 +105,6 @@ export default function UserAuthForm() {
         </form>
       </Form>
       {error && <Badge className="mt-2 text-red-500">{error}</Badge>}
-      <p className="text-sm">
-        Don't have account? <Link to="/signup">Signup</Link>{' '}
-      </p>
-      <p className="text-sm">
-        <Link to="/forgot-password">Forgot Password?</Link>
-      </p>
-
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-      </div>
     </>
   );
 }

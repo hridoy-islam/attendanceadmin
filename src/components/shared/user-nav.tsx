@@ -3,14 +3,11 @@ import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -51,13 +48,13 @@ export default function UserNav() {
             </p>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
+        {/* <DropdownMenuSeparator />
+        <DropdownMenuGroup> */}
+        {/* <DropdownMenuItem>
             <Link to="profile">Profile</Link>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          {/* <DropdownMenuItem>
+          </DropdownMenuItem> */}
+        {/* <DropdownMenuItem>
             Billing
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
@@ -66,8 +63,8 @@ export default function UserNav() {
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>New Team</DropdownMenuItem> */}
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
+        {/* </DropdownMenuGroup>
+        <DropdownMenuSeparator /> */}
         <DropdownMenuItem onClick={handleLogout}>
           Log out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>

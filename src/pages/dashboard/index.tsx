@@ -1,63 +1,24 @@
 import PageHead from '@/components/shared/page-head.jsx';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger
-} from '@/components/ui/tabs.js';
 import { useSelector } from 'react-redux';
-import DueTasks from '@/components/shared/due-tasks.js';
-import UpcomingTasks from '@/components/shared/upcomming-tasks.js';
-import AssignedTasks from '@/components/shared/assigned-tasks';
-import CompletedTasks from '@/components/shared/completed-tasks';
+import UserTableList from '../users/components/UserTableList';
+import CreateUser from '../users/components/CreateUser';
+import { useState } from 'react';
 
 export default function DashboardPage() {
   const { user } = useSelector((state: any) => state.auth);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleUserCreated = () => {
+    setRefreshKey((prev) => prev + 1); // Update the key to trigger re-fetch
+  };
+  console.log(user);
   return (
     <>
-      <PageHead title="Dashboard | App" />
-      <div className="max-h-screen flex-1 space-y-4 overflow-y-auto p-4 pt-6 md:p-8">
-        <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">
-            Hi, {user.name} 👋
-          </h2>
-        </div>
-        {/* <Tabs defaultValue="overview" className="space-y-4">
-          <TabsContent value="overview" className="space-y-4">
-            <div className="space-y-4">
-              <DueTasks user={user} />
-              <UpcomingTasks user={user} />
-              <AssignedTasks user={user} />
-            </div>
-          </TabsContent>
-        </Tabs> */}
+      <div className="space-y-4 p-4 md:p-8">
+        <PageHead title="Profile Page" />
 
-        <Tabs defaultValue="dueTasks" className="space-y-4">
-          {/* Tabs list for navigation */}
-          <TabsList>
-            <TabsTrigger value="dueTasks">Due Tasks</TabsTrigger>
-            <TabsTrigger value="upcomingTasks">Upcoming Tasks</TabsTrigger>
-            <TabsTrigger value="assignedTasks">Assigned Tasks</TabsTrigger>
-            <TabsTrigger value="completedTasks">Completed Tasks</TabsTrigger>
-          </TabsList>
-
-          {/* Tab content */}
-          <TabsContent value="dueTasks" className="space-y-4">
-            <DueTasks user={user} />
-          </TabsContent>
-
-          <TabsContent value="upcomingTasks" className="space-y-4">
-            <UpcomingTasks user={user} />
-          </TabsContent>
-
-          <TabsContent value="assignedTasks" className="space-y-4">
-            <AssignedTasks user={user} />
-          </TabsContent>
-
-          <TabsContent value="completedTasks" className="space-y-4">
-            <CompletedTasks user={user} />
-          </TabsContent>
-        </Tabs>
+        <CreateUser onUserCreated={handleUserCreated} />
+        <UserTableList refreshKey={refreshKey} />
       </div>
     </>
   );

@@ -1,8 +1,4 @@
-import { useState } from 'react';
-import Sidebar from '../shared/sidebar';
-import Header from '../shared/header';
-import MobileSidebar from '../shared/mobile-sidebar';
-import { MenuIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import UserNav from '../shared/user-nav';
 import { Toaster } from '@/components/ui/sonner';
 
@@ -11,36 +7,19 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-100">
-      <MobileSidebar
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-      />
-      <Sidebar />
-      <div className="flex w-0 flex-1 flex-col overflow-hidden">
-        <div className="relative z-10 flex h-20 flex-shrink-0 md:hidden">
-          <button
-            className="pl-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 xl:hidden"
-            onClick={() => setSidebarOpen(true)}
-          >
-            <span className="sr-only">Open sidebar</span>
-            <MenuIcon className="h-6 w-6" aria-hidden="true" />
-          </button>
-          <Header />
-        </div>
-
-        <div className="ml-auto flex items-center space-x-4">
-          <UserNav />
-        </div>
-
-        <main className="relative mx-2 my-3 mr-2 flex-1 overflow-hidden rounded-xl  border border-gray-300 bg-gray-100 focus:outline-none md:mx-0 md:my-4 md:mr-4 ">
-          {children}
-        </main>
-        <Toaster />
+    <div className="min-h-screen bg-gray-100">
+      <div className="mx-3 flex items-center justify-between">
+        <Link to="/dashboard" className="text-md mb-1 border-b font-semibold">
+          Users
+        </Link>
+        <UserNav />
       </div>
+
+      <main className="relative mx-2 my-3 mr-2 flex-1 overflow-hidden rounded-xl  border border-gray-300 bg-gray-100 focus:outline-none md:mx-0 md:my-4 md:mr-4 ">
+        {children}
+      </main>
+      <Toaster />
     </div>
   );
 }

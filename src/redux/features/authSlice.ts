@@ -69,14 +69,14 @@ export const loginUser = createAsyncThunk<UserResponse, UserCredentials>(
     const response = await request.data;
 
     localStorage.setItem(
-      'taskplanner',
+      'attendance',
       JSON.stringify(response.data.accessToken)
     );
     return response;
   }
 );
 export const logout = createAsyncThunk<void>('user/logout', async () => {
-  localStorage.removeItem('taskplanner');
+  localStorage.removeItem('attendance');
 });
 
 const authSlice = createSlice({
