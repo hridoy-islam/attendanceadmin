@@ -14,32 +14,23 @@ import { Loader2, PlusCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { registerUser } from '@/redux/features/authSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
 import { useToast } from '@/components/ui/use-toast';
 import { convertToLowerCase } from '@/lib/utils';
-import { fetchUserProfile } from '@/redux/features/profileSlice';
 
 export default function CreateUser({ onUserCreated }) {
-  const { user } = useSelector((state: any) => state.auth);
   const { toast } = useToast();
   const [isCompanyDialogOpen, setIsCompanyDialogOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const dispatch = useDispatch<AppDispatch>();
-  const { profileData } = useSelector((state: any) => state.profile);
 
   const onCompanySubmit = async (data) => {
     data.role = 'user'; // Set the role
     data.email = convertToLowerCase(data.email);
-    if (user?.role === 'company') {
-      data.company = user?._id;
-    }
-    if (user?.role === 'creator') {
-      dispatch(fetchUserProfile(user?._id));
-      data.company = profileData.company;
-    }
+
     setIsLoading(true); // Set loading state
     setError(null); // Reset any previous errors
 
@@ -114,6 +105,19 @@ export default function CreateUser({ onUserCreated }) {
                   id="password"
                   type="password"
                   {...register('password')}
+                  className="col-span-3"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="ipaddress" className="text-right">
+                  IP Address
+                </Label>
+                <Input
+                  id="ipaddress"
+                  type="text"
+                  {...register('ipaddress')}
                   className="col-span-3"
                   required
                 />

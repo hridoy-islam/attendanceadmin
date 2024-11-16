@@ -100,7 +100,8 @@ export default function UserTableList({ refreshKey }) {
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead>View Report</TableHead>
+              <TableHead>Edit</TableHead>
               <TableHead>User Status</TableHead>
             </TableRow>
           </TableHeader>
@@ -112,8 +113,17 @@ export default function UserTableList({ refreshKey }) {
                 <TableCell>
                   <div className="flex space-x-2">
                     <Link to={`user/report/${stuff._id}`}>
-                      <Button variant="outline" size="sm">
+                      <Button variant="destructive" size="sm">
                         Check Attendance
+                      </Button>
+                    </Link>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex space-x-2">
+                    <Link to={`user/edit/${stuff._id}`}>
+                      <Button variant="outline" size="sm">
+                        Edit
                       </Button>
                     </Link>
                   </div>

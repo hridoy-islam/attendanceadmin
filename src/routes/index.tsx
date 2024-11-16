@@ -1,5 +1,6 @@
 import ProtectedRoute from '@/components/shared/ProtectedRoute';
 import AttendanceReport from '@/pages/users/attendance';
+import EditUser from '@/pages/users/components/EditUser';
 import { Suspense, lazy } from 'react';
 import { Navigate, Outlet, useRoutes } from 'react-router-dom';
 
@@ -28,6 +29,10 @@ export default function AppRouter() {
         {
           element: <DashboardPage />,
           index: true
+        },
+        {
+          path: 'user/edit/:id',
+          element: <EditUser />
         },
         {
           path: 'user/report/:id',
