@@ -29,7 +29,6 @@ export default function EditUser() {
   const { id } = useParams();
   const [userData, setUserData] = useState<userDetails>();
   const { register, handleSubmit, reset } = useForm<userDetails>();
-  const [loading, setLoading] = useState<boolean>(false); // New loading s
   const fetchUserDetails = async () => {
     const res = await axiosInstance.get(`/users/${id}`);
     setUserData(res.data.data);
@@ -43,7 +42,6 @@ export default function EditUser() {
   const onSubmit = async (data: userDetails) => {
     try {
       data.email = convertToLowerCase(data.email);
-      setLoading(true); // Set loading to true
       await axiosInstance.patch(`/users/${id}`, data);
       toast({
         title: 'Profile Updated Successfully',
@@ -56,7 +54,6 @@ export default function EditUser() {
         variant: 'destructive'
       });
     } finally {
-      setLoading(false); // Set loading back to false
     }
   };
 
